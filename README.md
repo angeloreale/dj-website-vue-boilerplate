@@ -28,7 +28,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-For bookings data handling, wait until the release of dj-website-vue-boilerplate-server.
+For bookings (Next Dates section) dynamic data handling, wait until the release of dj-website-vue-boilerplate-server.
 
 Here is a preview:
 
