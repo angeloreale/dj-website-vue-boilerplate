@@ -7,36 +7,36 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <!-- COMMON TAGS -->
     <meta charset="utf-8">
-    <title>Dhruid - Musician and DJ</title>
+    <title><%= VUE_APP_SITE_TITLE_LONG %></title>
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:title" content="Dhruid">
-    <meta name="og:description" content="Musician since 1999, producer/DJ since 2009.">
-    <meta name="og:image:secure_url" itemprop="image" property="og:image:secure_url" content="https://dhruid.com/og-image-v2.jpg">
-    <meta name="og:image:secure_url" itemprop="image" property="og:image:secure_url" content="https://dhruid.com/og-image-small-v2.jpg">
-    <meta name="og:image:secure_url" itemprop="image" property="og:image" content="https://dhruid.com/og-image-v2.jpg">
-    <meta name="og:image:secure_url" itemprop="image" property="og:image" content="https://dhruid.com/og-image-small-v2.jpg">
-    <meta name="og:url" content="https://dhruid.com">
-    <meta name="og:site_name" content="Dhruid">
+    <meta name="og:title" content="<%= VUE_APP_SITE_TITLE_SHORT %>">
+    <meta name="og:description" content="<%= VUE_APP_SITE_DESCRIPTION_SHORT %>">
+    <meta name="og:image:secure_url" itemprop="image" property="og:image:secure_url" content="<%= VUE_APP_SITE_IMAGE %>">
+    <meta name="og:image:secure_url" itemprop="image" property="og:image:secure_url" content="<%= VUE_APP_SITE_IMAGE_SMALL %>">
+    <meta name="og:image:secure_url" itemprop="image" property="og:image" content="<%= VUE_APP_SITE_IMAGE %>">
+    <meta name="og:image:secure_url" itemprop="image" property="og:image" content="<%= VUE_APP_SITE_IMAGE_SMALL %>">
+    <meta name="og:url" content="<%= VUE_APP_SITE_URL %>"">
+    <meta name="og:site_name" content="<%= VUE_APP_SITE_TITLE_SHORT %>">
     <meta name="og:type" content="website">
-    <link rel="icon" type="image/jpeg" href="https://dhruid.com/og-image-small-v2.jpg" sizes="256x256" />
+    <link rel="icon" type="image/jpeg" href="<%= VUE_APP_SITE_IMAGE_SMALL %>" sizes="256x256" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Dhruid">
-    <meta name="twitter:description" content="Musician since 1999, producer/DJ since 2009.">
-    <meta name="twitter:image:src" content="https://dhruid.com/og-image.jpg">
+    <meta name="twitter:title" content="<%= VUE_APP_SITE_TITLE_SHORT %>">
+    <meta name="twitter:description" content="<%= VUE_APP_SITE_DESCRIPTION_SHORT %>">
+    <meta name="twitter:image:src" content="<%= VUE_APP_SITE_IMAGE %>">
     <!-- Search Engine -->
-    <meta name="description" content="Musician since 1999, producer/DJ since 2009, Dhruid has already won 2 prizes in the Minute Festival and played in Brazil and Europe favorite venues.">
-    <meta name="image" content="https://dhruid.com/og-image.jpg">
+    <meta name="description" content="<%= VUE_APP_SITE_DESCRIPTION_LONG %>">
+    <meta name="image" content="<%= VUE_APP_SITE_IMAGE %>">
     <!-- Schema.org for Google -->
-    <meta itemprop="name" content="Dhruid - Musician and DJ">
-    <meta itemprop="description" content="Musician since 1999, producer/DJ since 2009, Dhruid has already won 2 prizes in the Minute Festival and played in Brazil and Europe favorite venues.">
-    <meta itemprop="image" content="https://dhruid.com/og-image.jpg">
+    <meta itemprop="name" content="<%= VUE_APP_SITE_TITLE_LONG %>J">
+    <meta itemprop="description" content="<%= VUE_APP_SITE_TITLE_SHORT %>">
+    <meta itemprop="image" content="<%= VUE_APP_SITE_IMAGE %>">
     <!-- Google AdSense -->
-    <script data-ad-client="ca-pub-3000052282517892" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="<%= VUE_APP_SITE_ADSENSE_ID %>" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but dhruid-v2 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but <%= VUE_APP_SITE_URL %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->

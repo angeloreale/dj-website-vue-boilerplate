@@ -19,7 +19,6 @@ export default new Vuex.Store({
       state.userId = payload.user._id
       localStorage.setItem('tkn', payload.token)
       axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`
-      console.log('before dispatch fetch', localStorage.getItem('tkn'), axios.defaults.headers.common['Authorization'], payload.token)
       this.dispatch('fetchUserData')
     },
     performLogOut (state) {
@@ -58,7 +57,7 @@ export default new Vuex.Store({
       }
     },
     logIn (context, payload) {
-      let url = `${window.serverURL}/api-v1/login`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/login`
       console.log('logging in..')
       axios.post(url, payload, { headers: {
         'Content-Type': 'application/json'
@@ -72,7 +71,7 @@ export default new Vuex.Store({
         })
     },
     logOut () {
-      let url = `${window.serverURL}/api-v1/logout`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/logout`
       axios.get(url, { withCredentials: true })
         .then(res => {
           if (res.statusText === 'OK') {
@@ -82,7 +81,7 @@ export default new Vuex.Store({
         })
     },
     addBooking (context, payload) {
-      let url = `${window.serverURL}/api-v1/bookings`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/bookings`
       console.log('adding booking...', payload)
       let data = { payload: { ...payload }, id: this.state.userId }
       axios.post(url, data, { headers: {
@@ -98,7 +97,7 @@ export default new Vuex.Store({
         })
     },
     editBooking (context, payload) {
-      let url = `${window.serverURL}/api-v1/bookings`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/bookings`
       console.log('editing booking...', payload)
       let { id, ...newload } = payload
       let data = { payload: newload, id: payload.id }
@@ -115,7 +114,7 @@ export default new Vuex.Store({
         })
     },
     deleteBooking (context, payload) {
-      let url = `${window.serverURL}/api-v1/bookings`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/bookings`
       console.log('removing booking...', payload)
       let data = { id: payload }
       axios.delete(url, {
@@ -133,7 +132,7 @@ export default new Vuex.Store({
         })
     },
     fetchUserData () {
-      let url = `${window.serverURL}/api-v1/userdata`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/userdata`
       let data = { id: this.state.userId }
       console.log('fetching user data...')
       axios.post(url, data, { headers: {
@@ -148,7 +147,7 @@ export default new Vuex.Store({
         })
     },
     fetchBookingsData () {
-      let url = `${window.serverURL}/api-v1/bookings`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/bookings`
       console.log('fetching bookings data...')
       axios.get(url, { withCredentials: true })
         .then(res => {
@@ -159,7 +158,7 @@ export default new Vuex.Store({
         })
     },
     fetchAllBookingsData () {
-      let url = `${window.serverURL}/api-v1/allbookings`
+      let url = `${process.env.VUE_APP_SERVER_URL}/api-v1/allbookings`
       console.log('fetching ALL bookings data...')
       axios.get(url, { withCredentials: true })
         .then(res => {
@@ -170,21 +169,8 @@ export default new Vuex.Store({
         })
     },
     fetchLiveStreamingData () {
-      // let ytId = `UCyhZSljGzQ5da_u-n2uR--Q`
-      // let apiKey = `AIzaSyAXGRFq8s2EKP4g_LFIk7zuZf9MHivJ9DI`
-      // let url = `https://www.googleapis.com/youtube/v3/search?eventType=live&part=snippet&channelId=${ytId}&type=video&key=${apiKey}`
-      // console.log('fetching live streaming data...')
-      // axios.get(url)
-      //   .then(res => {
-      //     if (res.status === 200) {
-      //       console.log('fetched  live streams data', res.data)
-      //       if (res.data !== this.state.liveStreaming) {
-      //         this.commit('consolidateLiveStreamingData', res.data)
-      //       }
-      //     }
-      //   })
-      let twitchID = `86av2s62mqsu19zptacf7ly00t4l0f`
-      let url = `https://api.twitch.tv/helix/streams?user_login=dhruid`
+      let twitchID = process.env.VUE_APP_TWITCH_ID
+      let url = `https://api.twitch.tv/helix/streams?user_login=${process.env.VUE_APP_TWITCH_USER}`
       console.log('fetching live streaming data...')
       axios.get(url, { headers: { 'Client-ID': twitchID } })
         .then(res => {
@@ -197,13 +183,13 @@ export default new Vuex.Store({
         })
     },
     fetchInstagramData () {
-      let url = `https://www.instagram.com/dhruidmusic/?__a=1`
+      let url = `https://www.instagram.com/${process.env.VUE_APP_INSTAGRAM_HANDLE}/?__a=1`
       console.log('fetching instagram data...')
       axios.get(url)
         .then(res => {
           if (res.status === 200) {
             let images = res.data.graphql.user.edge_owner_to_timeline_media.edges.slice(0, 9).map(el => {
-              let url = `https://instagram.com/dhruidmusic/p/${el.node.shortcode}`
+              let url = `https://instagram.com/${process.env.VUE_APP_INSTAGRAM_HANDLE}/p/${el.node.shortcode}`
               let image = el.node.thumbnail_src
               let text = el.node.edge_media_to_caption.edges[0].node.text
               return { 'image': image, 'text': text.length > 160 ? text.substring(0, 160) + '...' : text, 'link': url }

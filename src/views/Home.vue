@@ -2,37 +2,35 @@
   main
     .hp
       section.hp__logo
-        img(src='../assets/dhruid.svg')
+        img(:src='logoImage')
 
       section.hp__socials
-        a(href='https://instagram.com/dhruidmusic', target='_blank', rel='noreferrer noopener')
+        a(:href='instagramURL', target='_blank', rel='noreferrer noopener')
           img(src='../assets/instagram.svg')
-        a(href='https://soundcloud.com/dhruid', target='_blank', rel='noreferrer noopener')
+        a(:href='soundcloudURL', target='_blank', rel='noreferrer noopener')
           img(src='../assets/soundcloud.svg')
-        a(href='https://open.spotify.com/show/5LLoTb92zFWRP5qBm74Pbw?si=CFPIA86SSwG1Uv9GaFm0Ew', target='_blank', rel='noreferrer noopener')
+        a(:href='spotifyURL', target='_blank', rel='noreferrer noopener')
           img(src='../assets/spotify.svg')
-        a(href='https://www.youtube.com/channel/UCyhZSljGzQ5da_u-n2uR--Q', target='_blank', rel='noreferrer noopener')
+        a(:href='youtubeURL', target='_blank', rel='noreferrer noopener')
           img(src='../assets/youtube.svg')
 
       section.hp__live.hp__box(v-if="liveStreaming && liveStreaming.data && liveStreaming.data.length > 0")
         h1.hp__live__title.hp__box__title="Now Live"
-        <div style="position:relative;padding-top:56.25%;">
-          <iframe src="https://player.twitch.tv/?channel=dhruid"  frameborder="0" scrolling="no" allowfullscreen="true" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-        </div>
+        div(style="position:relative;padding-top:56.25%;")
+          iframe(:src="twitchEmbedURL",  frameborder="0", scrolling="no", allowfullscreen="true", style="position:absolute;top:0;left:0;width:100%;height:100%;")
 
       section.hp__about.hp__box
         h1.hp__about__title.hp__box__title="About"
-          p.hp__about__text.hp__box__text="Formerly going under his real name, Angelo Reale, on 12/25/2019, Dhruid was born as a new artist. Musician since 1999, producer and DJ since 2009, Dhruid has already won 2 prizes in the Minute Festival with the short-film \"Único\" by Ícaro Cooke and Morgana Assunção, for which he has made the original soundtrack. Dhruid has also played in the most relevant events of his hometown (Salvador, Brazil), as well as in Europe (where he lived for 4 years)."
+          p.hp__about__text.hp__box__text="{{aboutCopy}}"
 
       section.hp__sounds.hp__box
         h1.hp__sounds__title.hp__box__title="Latest Sounds"
-        <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/79985529&color=%23333333&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+        iframe(width="100%", height="450", scrolling="no", frameborder="no", allow="autoplay", :src="soundcloudEmbedURL")
 
       section.hp_streams.hp__box(v-if="!liveStreaming && !liveStreaming.data || liveStreaming.data.length === 0")
         h1.hp__live__title.hp__box__title="Latest Streams"
-        <div style="position:relative;padding-top:56.25%;">
-          <iframe src="https://www.youtube.com/embed/+lastest?list=PLnFekemqRTYs1YostKMXQEacxEI0yoXUF" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-        </div>
+        div(style="position:relative;padding-top:56.25%;")
+          iframe(:src="youtubeEmbedURL", frameborder="0", allowfullscreen, style="position:absolute;top:0;left:0;width:100%;height:100%;")
 
       section.hp__insta.hp__box(v-if="instagramData && instagramData.length > 0")
         h1.hp__insta__title.hp__box__title="Instagram"
@@ -56,21 +54,8 @@
 
       section.hp__contact.hp__box
         h1.hp__contact__title.hp__box__title="Bookings"
-        img.hp__contact__details(src="../assets/contact.svg" alt="Contact details")
+        img.hp__contact__details(:src="contactImage" alt="Contact details")
     .hp__bg
-    //- .twitch-embed-settings(v-if="liveStreaming && liveStreaming.data && liveStreaming.data.length > 0")
-
-    //-   //- <!-- Load the Twitch embed script -->
-    //-   <script src="https://embed.twitch.tv/embed/v1.js"></script>
-
-    //-   //- <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
-    //-   <script type="text/javascript">
-    //-   new Twitch.Embed("twitch-embed", {
-    //-     width: 854,
-    //-     height: 480,
-    //-     channel: "monstercat"
-    //-   });
-    //-   </script>
 </template>
 
 <script>
@@ -85,6 +70,7 @@ export default {
     }
   },
   computed: {
+    // data fetching
     bookingsData () {
       return this.$store.state.bookingsData
     },
@@ -93,13 +79,46 @@ export default {
     },
     instagramData () {
       return this.$store.state.instagram
+    },
+
+    // images
+    logoImage () {
+      return require(`../assets/${process.env.VUE_APP_IMAGE_LOGO}`)
+    },
+    contactImage () {
+      return require(`../assets/${process.env.VUE_APP_IMAGE_CONTACT}`)
+    },
+
+    // social links + user specific info
+    instagramURL () {
+      return `https://instagram.com/${process.env.VUE_APP_INSTAGRAM_HANDLE}`
+    },
+    soundcloudURL () {
+      return `https://soundcloud.com/${process.env.VUE_APP_SOUNDCLOUD_USER}`
+    },
+    spotifyURL () {
+      return process.env.VUE_APP_SPOTIFY_LINK
+    },
+    youtubeURL () {
+      return process.env.VUE_APP_YOUTUBE_LINK
+    },
+    twitchEmbedURL () {
+      return `https://player.twitch.tv/?channel=${process.env.VUE_APP_TWITCH_USER}`
+    },
+    aboutCopy () {
+      return process.env.VUE_APP_ABOUT
+    },
+    soundcloudEmbedURL () {
+      return process.env.VUE_APP_SOUNDCLOUD_EMBED
+    },
+    youtubeEmbedURL () {
+      return process.env.VUE_APP_YOUTUBE_EMBED
     }
   },
   mounted () {
     this.$store.dispatch('fetchBookingsData')
     this.$store.dispatch('fetchLiveStreamingData')
     this.$store.dispatch('fetchInstagramData')
-    console.log('insta', this.instagramData)
     setInterval(() => {
       this.$store.dispatch('fetchLiveStreamingData')
     }, 5000)
@@ -124,7 +143,7 @@ export default {
   margin: 0 auto;
 
   &__bg {
-    background-image: url('../assets/hp.jpg');
+    background-image: url('../assets/#{$HP_BG}');
     background-size: cover;
     background-position: center center;
     position: absolute;
