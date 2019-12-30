@@ -1,9 +1,14 @@
-# dhruid-v2
+# DJ WEBSITE VUE BOILERPLATE
 
 ## Project setup
 ```
 npm install
 ```
+
+Modify `.env` file. You can add different `.env` for development/production. Check https://cli.vuejs.org/guide/mode-and-env.html#modes
+
+Add images to `src/assets`.
+
 
 ### Compiles and hot-reloads for development
 ```

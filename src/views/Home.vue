@@ -27,7 +27,7 @@
         h1.hp__sounds__title.hp__box__title="Latest Sounds"
         iframe(width="100%", height="450", scrolling="no", frameborder="no", allow="autoplay", :src="soundcloudEmbedURL")
 
-      section.hp_streams.hp__box(v-if="!liveStreaming && !liveStreaming.data || liveStreaming.data.length === 0")
+      section.hp_streams.hp__box
         h1.hp__live__title.hp__box__title="Latest Streams"
         div(style="position:relative;padding-top:56.25%;")
           iframe(:src="youtubeEmbedURL", frameborder="0", allowfullscreen, style="position:absolute;top:0;left:0;width:100%;height:100%;")
